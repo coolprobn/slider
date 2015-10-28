@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	 	#holder {
+	 		height: 400px;
+	 		width: 800px;
+	 		position: relative;
+	 		overflow: hidden;
+	 		left: 230px;
+	 		top: 80px;
+	 	}
+
+	 	#slider {
+	 		height: 400px;
+	 		width: 800px;
+	 		position: absolute;
+	 		overflow: hidden;
+	 	}
+
+	 	#image {
+	 		position: absolute;
+	 		display: inline;
+	 		width: 4000px;
+	 	}
+
+	 	img {
+	 		height: 400px;
+	 		width: 800px;
+	 	}
+
+	 	li {
+	 		list-style: none;
+	 		display: inline;
+	 		
+	 	}
+
+	 	ul {
+	 		width: 4000px;
+	 		position: absolute;
+
+	 	}
+
+	 	#left {
+	 		background: url("left.png");
+	 		z-index: 10;
+	 		top: 190px;
+	 		left: 20px;
+	 		height: 50px; 
+	 		width: 50px;
+	 		background-size: 50px 50px;
+	 		position: absolute;
+	 	}
+
+	 	#right {
+	 		background: url("right.png");
+	 		z-index: 10;
+	 		top: 190px;
+	 		left: 730px;
+	 		height: 50px; 
+	 		width: 50px;
+	 		background-size: 50px 50px;
+	 		position: absolute;
+	 	}
+	</style>
+</head>
+<body>
+    <div id="holder">
+            <div id="slider">
+            	<ul id="list">
+                  	<div id="image">
+              			<li ><img src="large.jpg" ></li>
+              			<li ><img src="psdHTML.png" class="image"></li>
+              			<li ><img src="under.jpg" class="image"></li>
+            		</div>
+          		</ul>
+   			</div>
+   			<div id="left"></div>
+   			<div id="right"></div>
+    </div>
+    <script type="text/javascript">
+    	var $holder = document.getElementById('holder');
+    	var $slider = document.getElementById('slider');
+    	var $list = document.getElementById('list');
+    	var change = 0;
+        $image = document.getElementById('image');
+        $image.style.left = 0 + 'px';
+        posLeft = parseInt($image.style.left);
+        
+
+    	var moveLeft = function(){
+            if(posLeft <= -1600){
+            	change = 800;
+            };   
+            if(posLeft >= 0){
+            	posLeft = -2400;
+            	change = 800;
+            };
+            posLeft += change; 
+    		$image.style.left = posLeft + 'px';
+    		$list.appendChild($image);
+    		$slider.appendChild($list); 
+    		$holder.appendChild($slider);
+
+    	};
+
+    	var moveRight = function(){
+            if(posLeft >= 0 ){
+            	change = -800;
+            };  
+            if (posLeft <= -1600) {
+            	posLeft = 800;
+            	change = -800;
+            };
+
+            posLeft += change; 
+    		$image.style.left = posLeft + 'px';
+    		$list.appendChild($image);
+    		$slider.appendChild($list); 
+    		$holder.appendChild($slider);
+
+    	};
+    	//setInterval(moveImage,2000);
+
+    	$left = document.getElementById('left');
+    	$right = document.getElementById('right');
+
+       	$left.addEventListener("click", function(){ 
+       		moveLeft();
+  		});
+
+       	$right.addEventListener("click", function(){ 
+       		moveRight();
+		  });
+
+
+    </script>
+</body>
+</html>
