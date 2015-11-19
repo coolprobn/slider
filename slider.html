@@ -3,10 +3,11 @@
 <head>
 	<title></title>
 	<style type="text/css">
-	*{
-		padding: 0;
-		margin: 0;
-	}
+		*{
+			padding: 0;
+			margin: 0;
+		}
+
 	 	#holder {
 	 		height: 400px;
 	 		width: 800px;
@@ -33,7 +34,6 @@
 	 		height: 400px;
 	 		width: 800px;
 	 	}
-
 	 	li {
 	 		list-style: none;
 	 		display: inline;
@@ -43,7 +43,6 @@
 	 	ul {
 	 		width: 4000px;
 	 		position: absolute;
-
 	 	}
 
 	 	#left {
@@ -55,6 +54,11 @@
 	 		width: 50px;
 	 		background-size: 50px 50px;
 	 		position: absolute;
+	 		opacity: 0.3;
+	 	}
+
+	 	#left:hover {
+	 		opacity: 1;
 	 	}
 
 	 	#right {
@@ -66,11 +70,44 @@
 	 		width: 50px;
 	 		background-size: 50px 50px;
 	 		position: absolute;
+	 		opacity: 0.3;
 	 	}
+
+	 	#right:hover {
+	 		opacity: 1;
+	 	}
+
+	 	#circle {
+	 		position: absolute;
+	 		left: 700px; 
+	 		top: 365px;
+	 		height: 30px;
+	 		width: 80px;
+	 		overflow: hidden;
+	 		z-index: 10;
+
+	 	}
+
+	 	#place {
+	 		position: absolute;
+	 		height: 30px;
+        	width: 150px;
+	 	}
+
+	 	#place img {
+	 		width: 150px;
+	 		height: 30px;
+	 	}
+
 	</style>
 </head>
 <body>
     <div id="holder">
+    		<div id="circle">
+    			     <div id="place">
+    			     	 <img src="newplace.png"> 
+    			     </div>
+    		</div>
             <div id="slider">
             	<ul id="list">
                   	<div id="image">
@@ -88,16 +125,15 @@
     	var $slider = document.getElementById('slider');
     	var $list = document.getElementById('list');
     	var change = 0;
-        $image = document.getElementById('image');
+        var $image = document.getElementById('image');
         $image.style.left = 0 + 'px';
-        posLeft = parseInt($image.style.left);
+        var posLeft = parseInt($image.style.left);
         
-
     	var moveLeft = function(){
-            if(posLeft <= -1600){
+            if(posLeft >= -2400){
             	change = 800;
             };   
-            if(posLeft >= 0){
+            if(posLeft == 0){
             	posLeft = -2400;
             	change = 800;
             };
@@ -106,38 +142,79 @@
     		$list.appendChild($image);
     		$slider.appendChild($list); 
     		$holder.appendChild($slider);
-
     	};
-
     	var moveRight = function(){
-            if(posLeft >= 0 ){
+            //debugger
+            if(posLeft <= 800 ){
             	change = -800;
             };  
-            if (posLeft <= -1600) {
+            if (posLeft == -1600) {
             	posLeft = 800;
             	change = -800;
             };
-
             posLeft += change; 
     		$image.style.left = posLeft + 'px';
     		$list.appendChild($image);
     		$slider.appendChild($list); 
     		$holder.appendChild($slider);
+    	};
+    	setInterval(moveRight,2000);
+
+       	var $circle = document.getElementById('circle');
+    	var $place = document.getElementById('place');
+    	$place.style.left = -56 + 'px';
+
+    	var c = 0;
+    	var pos = parseInt($place.style.left);
+
+       	var moveCircle = function(){
+            if(pos >= -84 ){
+            	c = 28;
+            };  
+            
+            if(pos == 0){
+            	pos = -84;
+            };
+           
+            pos += c; 
+            
+    		$place.style.left = pos + 'px';
+    		$circle.appendChild($place);
+    		$holder.appendChild($circle);
 
     	};
-    	//setInterval(moveImage,2000);
+    	setInterval(moveCircle,2000);
+
+    	var moveCircleLeft = function(){
+            if(pos == -56 ){
+            	pos = 0;
+            	c = 28;
+            };  
+            
+            if(pos <= 28){
+            	c = -28;
+            };
+           
+            pos += c; 
+            
+    		$place.style.left = pos + 'px';
+    		$circle.appendChild($place);
+    		$holder.appendChild($circle);
+
+    	};
 
     	$left = document.getElementById('left');
     	$right = document.getElementById('right');
 
        	$left.addEventListener("click", function(){ 
        		moveLeft();
+            moveCircleLeft();
   		});
 
        	$right.addEventListener("click", function(){ 
        		moveRight();
+            moveCircle();
 		  });
-
 
     </script>
 </body>
