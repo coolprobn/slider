@@ -24,13 +24,7 @@
 	 		overflow: hidden;
 	 	}
 
-	 	#image {
-	 		position: absolute;
-	 		display: inline;
-	 		width: 4000px;
-	 	}
-
-	 	img {
+	 	#slider img {
 	 		height: 400px;
 	 		width: 800px;
 	 	}
@@ -110,11 +104,9 @@
     		</div>
             <div id="slider">
             	<ul id="list">
-                  	<div id="image">
               			<li ><img src="large.jpg" ></li>
-              			<li ><img src="psdHTML.png" class="image"></li>
-              			<li ><img src="under.jpg" class="image"></li>
-            		</div>
+              			<li ><img src="psdHTML.png" ></li>
+              			<li ><img src="under.jpg"></li>
           		</ul>
    			</div>
    			<div id="left"></div>
@@ -125,9 +117,8 @@
     	var $slider = document.getElementById('slider');
     	var $list = document.getElementById('list');
     	var change = 0;
-        var $image = document.getElementById('image');
-        $image.style.left = 0 + 'px';
-        var posLeft = parseInt($image.style.left);
+        $list.style.left = 0 + 'px';
+        var posLeft = parseInt($list.style.left);
         
     	var moveLeft = function(){
             if(posLeft >= -2400){
@@ -138,8 +129,7 @@
             	change = 800;
             };
             posLeft += change; 
-    		$image.style.left = posLeft + 'px';
-    		$list.appendChild($image);
+    		$list.style.left = posLeft + 'px';
     		$slider.appendChild($list); 
     		$holder.appendChild($slider);
     	};
@@ -153,8 +143,7 @@
             	change = -800;
             };
             posLeft += change; 
-    		$image.style.left = posLeft + 'px';
-    		$list.appendChild($image);
+    		$list.style.left = posLeft + 'px';
     		$slider.appendChild($list); 
     		$holder.appendChild($slider);
     	};
@@ -187,7 +176,7 @@
 
     	var moveCircleLeft = function(){
             if(pos == -56 ){
-            	pos = 0;
+            	pos = 28;
             	c = 28;
             };  
             
